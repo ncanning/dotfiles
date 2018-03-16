@@ -1,0 +1,105 @@
+" Line numbers and stuff
+"=======================
+set relativenumber
+set number
+set ruler
+
+" Spaces instead of tabs
+"=======================
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+
+" Indicate 80 character line
+"===========================
+set colorcolumn=80
+
+" Actually use the backspace key
+"===============================
+set backspace=indent,eol,start
+
+" I have no idea what this does
+"==============================
+set inccommand=split
+
+" Plug
+"=========
+call plug#begin('~/.vim/plugged')
+
+Plug 'rking/ag.vim'
+Plug 'davinche/godown-vim'
+Plug 'ervandew/supertab'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'elixir-lang/vim-elixir'
+Plug 'Olical/vim-enmasse'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'derkwyatt/vim-scala'
+
+call plug#end()
+
+" Bunch of defaults for various filetypes
+"========================================
+filetype plugin indent on
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType gitcommit setlocal tw=72
+autocmd FileType markdown setlocal tw=80
+
+" Syntax coloring
+"================
+syntax on
+colorscheme molokai
+
+" Command to change to a light colorscheme for outdoor Vimming
+"=============================================================
+let g:outside = 0
+
+function! Outside()
+    if g:outside
+        colorscheme molokai
+        let g:outside = 0
+    else
+        colorscheme lucius
+        LuciusLight
+        let g:outside = 1
+    endif
+endfunction
+
+command! OU :call Outside()
+
+" set airline to show up before splitting
+"========================================
+set laststatus=2
+
+" I think this was for Tmux breaking copy/paste
+"==============================================
+set clipboard=unnamed
+
+" Use FZF on <C-P>
+"=================
+set rtp+=/usr/local/opt/fzf
+nnoremap <C-P> :FZF<CR>
+
+" Airline options
+"================
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#tab_nr_mode = 1
+
+" Scroll through command history with ctrl j and k
+"=================================================
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+
+" Neovim's highlighting was ugly
+"===============================
+set nohlsearch
+
+"Folding options
+"===============
+set foldcolumn=1
+set foldclose=all

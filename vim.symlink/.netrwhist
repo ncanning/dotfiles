@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/nathan/epimetheus'
+let g:netrw_dirhist_2='/Users/nathan/prometheus/src/main/scala/com/truex/prometheus'
+let g:netrw_dirhist_3='/Users/nathan/.config/nvim/colors'
+let g:netrw_dirhist_4='/Users/nathan/.vim/bundle'
+let g:netrw_dirhist_5='/Users/nathan/spark-redshift/build'
+let g:netrw_dirhist_6='/etc'
