@@ -27,7 +27,7 @@ set inccommand=split
 "=========
 call plug#begin('~/.vim/plugged')
 
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'davinche/godown-vim'
 Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
@@ -36,7 +36,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'Olical/vim-enmasse'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'derkwyatt/vim-scala'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 call plug#end()
 
@@ -45,6 +45,7 @@ call plug#end()
 filetype plugin indent on
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType gitcommit setlocal tw=72
 autocmd FileType markdown setlocal tw=80
 
@@ -99,7 +100,32 @@ cnoremap <C-k> <Up>
 "===============================
 set nohlsearch
 
-"Folding options
-"===============
+" Folding options
+"================
 set foldcolumn=1
 set foldclose=all
+
+" Use ag instead of ack
+"======================
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+
+" Search the current directory for whatever word the cursor is on
+"================================================================
+function! FindCurrentWord()
+    exe "normal viwo\<esc>"
+    normal "xyw
+    exe 'Ack' @x
+endfunction
+
+function! FindDefinition()
+    exe "normal viwo\<esc>"
+    let @x = "\"def "
+    normal "Xyw
+    let @X = "\""
+    exe 'Ack' @x
+endfunction
+
+nnoremap <C-x> :call FindCurrentWord()<CR>
+nnoremap <C-X> :call FindDefinition()<CR>
