@@ -37,6 +37,9 @@ Plug 'Olical/vim-enmasse'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug '~/code/vim-velocity'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -44,10 +47,17 @@ call plug#end()
 "========================================
 filetype plugin indent on
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2
-autocmd FileType typescript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=4 softtabstop=4
 autocmd FileType yaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType gitcommit setlocal tw=72
 autocmd FileType markdown setlocal tw=80
+
+augroup SyntaxSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+    autocmd BufNewFile,BufRead *.ts set filetype=typescript
+augroup END
 
 " Syntax coloring
 "================
